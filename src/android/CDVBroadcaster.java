@@ -99,13 +99,15 @@ public class CDVBroadcaster extends CordovaPlugin {
         return super.onMessage( id, data );
     }
 
-    private void fireNativeEvent( final String eventName, JSONObject userData ) {
+    private void fireNativeEvent( final String eventName, JSONObject userData , final String componentName) {
         if( eventName == null ) {
             throw new IllegalArgumentException("eventName parameter is null!");
         }
 
         final Intent intent = new Intent(eventName);
-
+        if(componentName != null && !componentName.isEmpty() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+          intent.setComponent(new ComponentName(cordova.getActivity().getApplicationContext(), componentName));
+        }
         intent.putExtras(toBundle( new Bundle(), userData ));
 
         sendBroadcast( intent );
@@ -129,12 +131,12 @@ public class CDVBroadcaster extends CordovaPlugin {
 
             }
             final JSONObject userData = args.getJSONObject(1);
-
+            final String componentName = args.getString(2);
 
             cordova.getThreadPool().execute(new Runnable() {
                 @Override
                 public void run() {
-                    fireNativeEvent(eventName, userData);
+                    fireNativeEvent(eventName, userData, componentName);
                 }
             });
 
