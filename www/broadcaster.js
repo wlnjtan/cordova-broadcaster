@@ -39,8 +39,8 @@ function Broadcaster() {
 
 }
 
-Broadcaster.prototype.fireNativeEvent = function(eventname, data, success, error) {
-     exec(success, error, "broadcaster", "fireNativeEvent", [ eventname, data ]);
+Broadcaster.prototype.fireNativeEvent = function(eventname, data, componentName, success, error) {
+     exec(success, error, "broadcaster", "fireNativeEvent", [ eventname, data, componentName ]);
 }
 
 Broadcaster.prototype.fireEvent = function(type, data) {
