@@ -29,7 +29,7 @@ $ cordova create <PATH> [ID [NAME [CONFIG]]] [options]
 $ cd <PATH>
 $ cordova platform add [ios|android]
 $ cordova plugin add cordova-plugin-broadcaster
-$ cordova plugin add https://github.com/wlnjtan/cordova-broadcaster.git
+$ cordova plugin add https://github.com/wlnjtan/cordova-plugin-broadcaster.git
 ```
 
 ## Usage:
